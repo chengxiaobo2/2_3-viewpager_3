@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,17 +51,25 @@ public class MainActivity extends AppCompatActivity {
             list.add(arr[r1]);
 
             ViewGroup viewGroup = (ViewGroup) (View.inflate(MainActivity.this, R.layout.view_pager_page, null));
-            ImageView iv01 = (ImageView) viewGroup.findViewById(R.id.iv_01);
+            MyImageView iv01 = (MyImageView) viewGroup.findViewById(R.id.iv_01);
 
-
-            iv01.setOnClickListener(new View.OnClickListener()
+            iv01.setDissmissInterface(new MyImageView.DissmissInterface()
             {
                 @Override
-                public void onClick(View v) {
+                public void dissmiss() {
 
-                    Toast.makeText(MainActivity.this, "Touch===", Toast.LENGTH_SHORT).show();
+                    viewPager.setVisibility(View.GONE);
                 }
             });
+
+//            iv01.setOnClickListener(new View.OnClickListener()
+//            {
+//                @Override
+//                public void onClick(View v) {
+//
+//                    Toast.makeText(MainActivity.this, "Touch===", Toast.LENGTH_SHORT).show();
+//                }
+//            });
             
             iv01.setImageResource(arr[r1]);
 
@@ -72,7 +78,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-        class ViewPagerAdapter extends PagerAdapter {
+    @Override
+    public void onBackPressed() {
+
+        if(viewPager.getVisibility()==View.VISIBLE)
+        {
+            viewPager.setVisibility(View.GONE);
+        }else
+        {
+            this.finish();
+        }
+    }
+
+    class ViewPagerAdapter extends PagerAdapter {
 
             private List<ViewGroup> viewList;
 
