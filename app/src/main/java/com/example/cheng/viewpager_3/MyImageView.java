@@ -131,14 +131,14 @@ public class MyImageView extends ImageView {
                     if (parentLastY-parentDownY>=0) //向下
                     {
                         finalTranslateY=(viewGroupParent.getHeight()+this.getHeight())/2;
-                    }else
+                    }else //向上
                     {
                         finalTranslateY=-(viewGroupParent.getHeight()+this.getHeight())/2;
                     }
                     if(parentLastX-parentDownX>=0) //向右
                     {
                         finalTranslateX=(viewGroupParent.getWidth()+this.getWidth())/2;
-                    }else
+                    }else //向左
                     {
                         finalTranslateX=-(viewGroupParent.getWidth()+this.getWidth())/2;
                     }
