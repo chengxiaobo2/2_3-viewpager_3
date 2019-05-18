@@ -14,14 +14,14 @@ https://github.com/chengxiaobo2/2_3-viewpager_3/blob/master/viewpager_3%20%E8%AF
   * 但是发现这样做的时候，有些卡顿（具体怎么回事，我忘了，哈哈）。
 * 后来发现，我们可以利用ViewPager的拦截去处理。  
   * ImageView down->返回true。
-  * ImageView 横向移动，ViewPager会拦截Move事件。并调用ImageViewd的Cancel。
+  * ImageView 横向移动，ViewPager会拦截Move事件。并调用ImageView的Cancel。
      * 我们就在Cancel里面，让ImageView归位，ViewPager处理横向滑动。
   * ImageView 纵向移动，ViewPager不会拦截Move事件，这时候我们可以让ImageView处理位移以及设置父级的透明度。
   * 手指抬起的时候，根据移动的距离，来判断ViewPager是消失呢，还是ImageView归位呢。
 
 ## 具体实现遇到的问题
-* 问题一：因为ImageView会根据我们手指的Move来这是Translation。相当于ImageView的坐标系变了。 导致计算移动的距离不准确。<br>
-    * 我的代码用的是父级坐标系实现的。
+* 问题一：因为ImageView会根据我们手指的Move来设置Translation。这时候ImageView的坐标系变了。 导致计算移动的距离不对了。<br>
+    * 我的代码用的是父级坐标系计算移动距离。
     ```java
     private float[] getParentPoint(float []src)
     {
